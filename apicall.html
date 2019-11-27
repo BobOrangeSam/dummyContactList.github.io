@@ -66,7 +66,7 @@
 						// On remplit la liste
 						fillMultipleContactListById(list.id,nbOccurence,prenom,nom,telephone).then((isFilled) => {
 							console.log('contact list '+list.id+' filled');
-							document.getElementById('resultat').innerHTML = 'Liste de contact créée.';
+							document.getElementById('resultat').innerHTML = '<div class="row"><div class="col-sm-6 mb-3 mb-md-0"><div class="card"><div class="card-body"><h5 class="card-title">Liste de contact créée !</h5><a href="index.html" class="btn btn-primary">Retour</a></div></div></div></div>';
 						}).catch((error) => {
 							console.error(error);
 							document.getElementById('resultat').innerHTML = 'Erreur dans la création de la liste :<i>'+error+'</i>';
