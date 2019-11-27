@@ -1,6 +1,6 @@
 # PureCloud API test application for creating a dummy outbound contact list
 
-This repository contains code for a static web site that can be embedded inside PureCloud to process API tests.
+This repository contains code for a static web site that can be embedded inside Genesys PureCloud (https://www.genesys.com/) to process API tests.
 This is provided as developped by Orange Business Services as an example of a frontend calling the PureCloud API.
 It is inspired by PureCloud GDPR Requests App (https://github.com/purecloudgdprrequests/purecloudgdprrequests.github.io).
 
