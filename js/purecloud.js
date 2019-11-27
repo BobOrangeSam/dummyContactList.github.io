@@ -1,7 +1,7 @@
 //#region set const and variables
 
 const clientId = "ec0acb98-d1da-47b8-b88f-cb909c35d4d2"; // Create a new "Token Implicit Grant (Browser)" OAuth credential in your PureCloud org and paste the Client Id here. See README.md for details
-const redirectUrl = "http://localhost:8080/listeCampagne/apicall.html"; // Update this variable to your web server URL (e.g. http://localhost:8080/index.html). The value should reflect your "Redirect URL" setting in your OAuth credentials
+const redirectUrl = "https://boborangesam.github.io/dummyContactList.github.io/apicall.html"; // Update this variable to your web server URL (e.g. http://localhost:8080/index.html). The value should reflect your "Redirect URL" setting in your OAuth credentials
 const environment = "mypurecloud.ie"; // Your PureCloud environment (e.g. mypurecloud.ie, mypurecloud.de, mypurecloud.com, mypurecloud.com.au, mypurecloud.jp)
 
 const platformClient = require("platformClient");
