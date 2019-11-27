@@ -20,7 +20,7 @@ To configure the application, you need to create a new `Token Implicit Grant (Br
     * Click on `Save` and note the `Client ID` string value
 * Edit the `static/js/purecloud.js` file and update the following variables with your own PureCloud credentials
     * clientId: The new OAuth Client Id you just generated
-    * redirectUrl: Corresponds to the full URL to your index.html and must be the same than the one you set in the OAuth credentials above (e.g. `https://boborangesam.github.io/dummyContactList.github.io/apicall.html`)
+    * redirectUrl: Corresponds to the full URL to your apicall.html and must be the same than the one you set in the OAuth credentials above (e.g. `https://boborangesam.github.io/dummyContactList.github.io/apicall.html`)
     * environment: Either `mypurecloud.ie`, `mypurecloud.de`, `mypurecloud.com`, `mypurecloud.com.au` or `mypurecloud.jp` depending on where your PureCloud org is located
 
 To embed the resulting web site directly inside PureCloud, you need to create a new `Integration`
@@ -29,7 +29,7 @@ To embed the resulting web site directly inside PureCloud, you need to create a 
 * In the `Details` tab:
     * Enter a name for the new client application
 * In the `Configuration` tab, enter the following:
-    * Application URL: The full path to your site (e.g. https://boborangesam.github.io/dummyContactList.github.io/apicall.html)
+    * Application URL: The full path to the root your site (e.g. https://boborangesam.github.io/dummyContactList.github.io/index.html)
     * Application Type: stand-alone or widget, as you wish. Widgets are best for agents-facing apps, stand-alone are best for administrators' tasks.
     * Application Category: (leave empty)
     * Iframe Sandbox Options: allow-scripts,allow-same-origin,allow-forms,allow-modals (default value)
