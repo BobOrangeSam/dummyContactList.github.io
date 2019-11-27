@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Liste de contacts pour une demo</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="assets/brand/logo-53x53.png" alt="Logo Orange" width="53" height="53">
+        <h2>Liste de contacts</h2>
+        <p class="lead">Création à la volée d'un fichier de liste de contacts pour une campagne sortante</p>
+      </div>
+	  
+	  <div id="resultat"><i>Merci de patienter...</i></div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2019 Orange Business Services</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">A propos</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/js/vendor/jquery-slim.min.js"></script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/holder.min.js"></script>
+	<script src="https://sdk-cdn.mypurecloud.com/javascript/41.0.0/purecloud-platform-client-v2.min.js"></script>
+	<script src="js/purecloud.js"></script>
+    <script>
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+			// Récupération des paramètres
+			var getUrlParameter = function getUrlParameter(sParam) {
+				var sPageURL = window.location.search.substring(1),
+					sURLVariables = sPageURL.split('&'),
+					sParameterName,
+					i;
+
+				for (i = 0; i < sURLVariables.length; i++) {
+					sParameterName = sURLVariables[i].split('=');
+
+					if (sParameterName[0] === sParam) {
+						return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+					}
+				}
+			};
+			var nameNewContactList = getUrlParameter('nomListe');
+			var nbOccurence=getUrlParameter('nbLignes');
+			var prenom=getUrlParameter('prenom');
+			var nom=getUrlParameter('nom');
+			var telephone=getUrlParameter('phonenum');
+			// On teste si la liste demandée existe déjà
+			getContactListByName(nameNewContactList).then((contactlists) => {
+				if (contactlists.total==0) {
+					// La liste n'existe pas, on la crée
+					createContactList(nameNewContactList).then((list) => {
+						console.log('contact list '+list.id+' created');
+						// On remplit la liste
+						fillMultipleContactListById(list.id,nbOccurence,prenom,nom,telephone).then((isFilled) => {
+							console.log('contact list '+list.id+' filled');
+							document.getElementById('resultat').innerHTML = 'Liste de contact créée.';
+						}).catch((error) => {
+							console.error(error);
+							document.getElementById('resultat').innerHTML = 'Erreur dans la création de la liste :<i>'+error+'</i>';
+						});
+						
+					}).catch((error) => {
+						console.error(error);
+						document.getElementById('resultat').innerHTML = 'Erreur dans la création de la liste (inexistante au départ) :<i>'+error+'</i>';
+					});
+				} else {
+					// La liste existe, on recherche l'id de la liste
+					// On vide la liste en question
+					var contactlistid = contactlists.entities[0].id;
+					emptyContactList(contactlistid).then((list) => {
+						console.log('contact list '+contactlistid+' emptied');
+						// On remplit la liste
+						fillMultipleContactListById(contactlistid,nbOccurence,prenom,nom,telephone).then((isFilled) => {
+							console.log('contact list '+contactlistid+' filled');
+						}).catch((error) => {
+							console.error(error);
+							document.getElementById('resultat').innerHTML = 'Erreur dans le remplissage de la liste :<i>'+error+'</i>';
+						});
+						
+					}).catch((error) => {
+						console.error(error);
+						document.getElementById('resultat').innerHTML = 'Erreur dans la vidange de la liste :<i>'+error+'</i>';
+					});
+				}
+			}).catch((error) => {
+				console.error(error);
+				document.getElementById('resultat').innerHTML = 'Erreur dans l\'identification de la liste :<i>'+error+'</i>';
+			});
+        }, false);
+      })();
+    </script>
+  </body>
+</html>
