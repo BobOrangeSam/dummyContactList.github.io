@@ -19,7 +19,12 @@
 	  <div id="resultat"><i>Merci de patienter...</i></div>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2019 Orange Business Services</p>
+        <script type="text/javascript">
+				var ladate=new Date()
+				document.write('<p class="mb-1">&copy; 2019-');
+				document.write(ladate.getFullYear())
+				document.write(' Orange Business Services</p>');
+	</script>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="https://www.orange-business.com/">A propos</a></li>
         </ul>
